@@ -2,6 +2,9 @@ require("dotenv").config();
 require("express-async-errors");
 const express = require("express");
 const app = express();
+// connectDB
+const connectDB = require("./db/connect");
+
 // routers
 const jobsRouter = require("./routes/jobs");
 const authRouter = require("./routes/auth");
@@ -20,10 +23,11 @@ app.use("/api/v1/jobs", jobsRouter);
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 3000;
 
 const start = async () => {
   try {
+    await connectDB(process.env.MONGO_URI);
     app.listen(port, () =>
       console.log(`Server is listening on port ${port}...`)
     );
