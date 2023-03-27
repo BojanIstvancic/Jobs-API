@@ -42,4 +42,10 @@ UserSchema.methods.createJWT = function () {
 };
 // we can extend schema and add another methods in methods property
 
+UserSchema.methods.comparePassword = async function (candidatePassword) {
+  const isMatch = await bcrypt.compare(candidatePassword, this.password);
+
+  return isMatch;
+};
+
 module.exports = mongoose.model("User", UserSchema);
