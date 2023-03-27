@@ -26,6 +26,7 @@ const JobSchema = new mongoose.Schema(
     },
   },
   { timestamps: true }
+  // timestamps - generates properties createdAt and updatedAt
 );
 
-module.exports = module.model("Job", JobSchema);
+module.exports = mongoose.model("Job", JobSchema);
