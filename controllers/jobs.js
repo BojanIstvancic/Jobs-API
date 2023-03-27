@@ -34,7 +34,10 @@ Person.
 
 // 08:21:00  - get all jobs - timestamp
 const getAllJobs = async (req, res) => {
-  res.send("get all jobs");
+  const jobs = await Job.find({ createdBy: req.user.userId }).sort("createdAt");
+  // get all jobs createdBy specific user
+
+  res.status(StatusCodes.OK).send({ jobs, count: jobs.length });
 };
 
 const getJob = async (req, res) => {
