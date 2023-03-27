@@ -4,6 +4,7 @@ const express = require("express");
 const app = express();
 // connectDB
 const connectDB = require("./db/connect");
+const authenticateUser = require("./middleware/authentication");
 
 // routers
 const jobsRouter = require("./routes/jobs");
@@ -18,7 +19,8 @@ app.use(express.json());
 
 // routes
 app.use("/api/v1/auth", authRouter);
-app.use("/api/v1/jobs", jobsRouter);
+app.use("/api/v1/jobs", authenticateUser, jobsRouter);
+// we need authentication for all the routes thats why we add middleware here
 
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
