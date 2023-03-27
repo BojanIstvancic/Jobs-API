@@ -32,7 +32,7 @@ Person.
     exec(callback);
 */
 
-// 08:21:00  - get all jobs - timestamp
+// 08:36:40 - get single job completed
 const getAllJobs = async (req, res) => {
   const jobs = await Job.find({ createdBy: req.user.userId }).sort("createdAt");
   // get all jobs createdBy specific user
@@ -41,7 +41,22 @@ const getAllJobs = async (req, res) => {
 };
 
 const getJob = async (req, res) => {
-  res.send("get job");
+  const {
+    user: { userId },
+    params: { id: jobId },
+  } = req;
+
+  // get userId from req.user.userId
+  // get jobId  from req.params.id
+
+  const job = await Job.findOne({ _id: jobId, createdBy: userId });
+  // get job with the id of jobID and that is created by
+
+  if (!job) {
+    throw new NotFoundError(`No job with id ${jobId}`);
+  }
+
+  res.status(StatusCodes.OK).json({ job });
 };
 
 const createJob = async (req, res) => {
