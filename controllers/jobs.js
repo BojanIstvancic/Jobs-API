@@ -69,7 +69,29 @@ const createJob = async (req, res) => {
 };
 
 const updateJob = async (req, res) => {
-  res.send("update job");
+  const {
+    body: { company, position },
+    user: { userId },
+    params: { id: jobId },
+  } = req;
+
+  if (company === "" || position === "") {
+    throw BadRequestError("Company or Position field is missing");
+  }
+
+  const job = await Job.findByIdAndUpdate(
+    { _id: jobId, createdBy: userId }, // filter
+    req.body, // data that we are sending
+    { new: true, runValidators: true }
+    // new: true - returns modified documend instead of the old one
+    // runValidators: true - run validators inside schema
+  );
+
+  if (!job) {
+    throw new NotFoundError(`No job with id ${jobId}`);
+  }
+
+  res.status(StatusCodes.OK).json({ job });
 };
 
 const deleteJob = async (req, res) => {
