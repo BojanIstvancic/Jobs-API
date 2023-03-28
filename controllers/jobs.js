@@ -32,7 +32,7 @@ Person.
     exec(callback);
 */
 
-// 08:36:40 - get single job completed
+// 09:10:04 - Security
 const getAllJobs = async (req, res) => {
   const jobs = await Job.find({ createdBy: req.user.userId }).sort("createdAt");
   // get all jobs createdBy specific user
