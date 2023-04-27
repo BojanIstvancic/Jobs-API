@@ -77,3 +77,8 @@ const jsonData = pm.response.json()
 pm.globals.set("accessToken", jsonData.token);
 ```
 - in restricted backend routes - authorization / Type: change to Bearer Token and add to Token global variable  ***{{accessToken}}***
+
+### Swagger UI - setup a docs
+
+### IP Adress - MongoDB
+- we need to switch to allow access fron anywhere when we host the app on some server

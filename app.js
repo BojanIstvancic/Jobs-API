@@ -7,7 +7,7 @@ const helmet = require("helmet");
 const cors = require("cors");
 // enable cors
 const xss = require("xss-clean");
-// sanitize user inputs
+// sanitize user inputs - protect from malicious attacks
 const rateLimiter = require("express-rate-limit");
 // limit repeated requests
 
