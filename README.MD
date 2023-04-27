@@ -67,3 +67,13 @@ Swagger UI
       required: true
       description: the job id
 ```
+
+### Add accessToken dynamically in PostMan
+- Login / tests - add functionality to add token dinamically and set it as global variable
+- Register / tests - we can to the same to register route
+- 
+```js
+const jsonData = pm.response.json()
+pm.globals.set("accessToken", jsonData.token);
+```
+- in restricted backend routes - authorization / Type: change to Bearer Token and add to Token global variable  ***{{accessToken}}***

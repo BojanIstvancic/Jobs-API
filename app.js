@@ -37,6 +37,13 @@ app.use(cors());
 app.use(xss());
 // extra packages
 
+// HERE WE CAN CREATE SIMPLE "/" route to see if the app is deployed
+app.get("/", (req, res) => {
+  res.send("jobs api");
+});
+// we need to add engines in package.json
+// we also need to change nodemon to node
+
 // routes
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/jobs", authenticateUser, jobsRouter);

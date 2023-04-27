@@ -32,7 +32,7 @@ Person.
     exec(callback);
 */
 
-// 09:10:04 - Security
+// 09:16:38 - Heroku
 const getAllJobs = async (req, res) => {
   const jobs = await Job.find({ createdBy: req.user.userId }).sort("createdAt");
   // get all jobs createdBy specific user
